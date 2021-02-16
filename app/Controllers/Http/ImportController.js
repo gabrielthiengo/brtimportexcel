@@ -5,8 +5,8 @@ const Excel = use('exceljs')
 
 class ImportController {
   async store({ request, response }) {
-    const upload = request.file('file', { size: '5mb' })
 
+    const upload = request.file('file', { size: '5mb' })
     const fileName = `${Date.now()}.xlsx`
 
     await upload.move(Helpers.tmpPath('uploads'), {
