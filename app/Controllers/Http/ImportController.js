@@ -19,12 +19,10 @@ class ImportController {
 
     let workbook = new Excel.Workbook()
 
-    workbook = await workbook.xlsx.readFile(`temp/uploads/${fileName}`)
+    workbook = await workbook.xlsx.readFile(`tmp/uploads/${fileName}`)
 
     const explanation = workbook.getWorksheet('Mailing')
-    console.log(explanation)
 
-    console.log(explanation.getCell('A' + 2).fill)
 
     return [{
         column: explanation.getCell('A' + 1).value,
