@@ -2,6 +2,7 @@
 
 const Helpers = use('Helpers')
 const Excel = use('exceljs')
+const fs = use('fs')
 
 class ImportController {
   async store({ request, response }) {
@@ -26,11 +27,10 @@ class ImportController {
     var excelList = []
 
         const colColumn = await explanation.getColumn('C')
-        const colCount = await explanation.columnCount
-        const rowCount = await explanation.rowCount
 
         colColumn.eachCell((cell, index) => {
-          var excel = {
+          let isPriorizado = false
+          let excel = {
             solicitacao: '',
             cartao: '',
             administradora: '',
@@ -209,11 +209,20 @@ class ImportController {
             excel.coment_reclamacao = explanation.getCell('CH' + index).value
             excel.bco_agencia = explanation.getCell('CI' + index).value
             excel.nro_cc = explanation.getCell('CJ' + index).value
-            excel.priorizado = false
+
+            const { tint } = explanation.getCell('A' + index).fill.fgColor
+
+            if(tint) {
+              isPriorizado = true
+            }
+
+            excel.priorizado = isPriorizado
 
             excelList.push(excel)
           }
         })
+
+        fs.unlinkSync(`tmp/uploads/${fileName}`)
 
         return excelList
   }
