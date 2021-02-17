@@ -204,7 +204,7 @@ class ImportController {
             excel.dt_inicio_fase = explanation.getCell('CB' + index).value
             excel.atividade = explanation.getCell('CC' + index).value
             excel.empresa = explanation.getCell('CE' + index).value
-            excel.canal = explanation.getCell('CF' + index).value
+            excel.canal7 = explanation.getCell('CF' + index).value
             excel.dados_da_reclamacao = explanation.getCell('CG' + index).value
             excel.coment_reclamacao = explanation.getCell('CH' + index).value
             excel.bco_agencia = explanation.getCell('CI' + index).value
